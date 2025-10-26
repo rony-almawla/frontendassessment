@@ -1,5 +1,5 @@
 <template>
-  <AppHeader />   <!-- ✅ Header now included here -->
+  <AppHeader />
   <div class="home">
     <h1>Welcome, {{ userName }}</h1>
     <p>Email: {{ userEmail }}</p>
@@ -22,18 +22,14 @@ export default {
       const token = localStorage.getItem('jwt-token')
       const userInfo = localStorage.getItem('user-info')
 
-      if (!token || !userInfo) {
-        window.location.href = '/login'
-        return
-      }
+      if (!token || !userInfo) return window.location.href = '/login'
 
       try {
         const parsedToken = JSON.parse(atob(token))
         if (Date.now() > parsedToken.exp) {
           localStorage.removeItem('jwt-token')
           localStorage.removeItem('user-info')
-          window.location.href = '/login'
-          return
+          return window.location.href = '/login'
         }
 
         const user = JSON.parse(userInfo)

@@ -3,53 +3,19 @@
   <div class="entity-form">
     <h1>Add Entity</h1>
     <form @submit.prevent="onSubmit" enctype="multipart/form-data">
-      <div>
-        <label>First Name</label>
-        <input v-model="firstName" required />
-      </div>
+      <BaseInput v-model="firstName" placeholder="First Name" required />
+      <BaseInput v-model="lastName" placeholder="Last Name" required />
+      <label>Date of Birth</label>
+      <input type="date" v-model="dob" required />
 
-      <div>
-        <label>Last Name</label>
-        <input v-model="lastName" required />
-      </div>
+      <label>Marital Status</label>
+      <BaseRadio v-model="maritalStatus" :options="['Single', 'Married']" />
 
-      <div>
-        <label>Date of Birth</label>
-        <input type="date" v-model="dob" required />
-      </div>
+      <BaseInput v-model="address" placeholder="Address" required />
+      <BaseInput v-model="phone" type="tel" placeholder="8-digit Phone" required />
 
-      <div>
-        <label>Marital Status</label>
-        <input type="radio" value="Single" v-model="maritalStatus" /> Single
-        <input type="radio" value="Married" v-model="maritalStatus" /> Married
-      </div>
-
-      <div>
-        <label>Address</label>
-        <input v-model="address" required />
-      </div>
-
-      <div>
-  <label>Phone</label>
-  <input 
-    type="tel" 
-    v-model="phone" 
-    required 
-    pattern="\d{8}" 
-    placeholder="Enter 8-digit phone number" 
-    title="Phone number must be exactly 8 digits" 
-  />
-</div>
-
-
-      <div>
-        <label>Gender</label>
-        <select v-model="gender" required>
-          <option disabled value="">Select Gender</option>
-          <option>Male</option>
-          <option>Female</option> 
-        </select>
-      </div>
+      <label>Gender</label>
+      <BaseSelect v-model="gender" :options="['Male','Female','Other']" required />
 
       <div>
         <label>Profile Picture</label>
@@ -63,11 +29,14 @@
 
 <script>
 import AppHeader from './AppHeader.vue'
+import BaseInput from './BaseInput.vue'
+import BaseSelect from './BaseSelect.vue'
+import BaseRadio from './BaseRadio.vue'
 import axios from 'axios'
 
 export default {
   name: 'AddEntity',
-  components: { AppHeader },
+  components: { AppHeader, BaseInput, BaseSelect, BaseRadio },
   data() {
     return {
       firstName: '',
@@ -86,7 +55,7 @@ export default {
     },
     async onSubmit() {
       try {
-        let entityData = {
+        const entityData = {
           firstName: this.firstName,
           lastName: this.lastName,
           dob: this.dob,
@@ -96,7 +65,6 @@ export default {
           gender: this.gender,
           profilePic: this.profilePic ? this.profilePic.name : ''
         }
-
 
         await axios.post('http://localhost:3000/entities', entityData)
         alert('Entity added successfully!')
@@ -119,16 +87,6 @@ export default {
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
-
-.entity-form div {
-  margin-bottom: 15px;
-}
-
-.entity-form input, .entity-form select {
-  width: 100%;
-  padding: 8px;
-  font-size: 14px;
-}
 button {
   padding: 10px 20px;
   background-color: #5dade2;
@@ -137,7 +95,5 @@ button {
   border-radius: 6px;
   cursor: pointer;
 }
-button:hover {
-  background-color: #5499c7;
-}
+button:hover { background-color: #5499c7; }
 </style>

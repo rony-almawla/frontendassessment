@@ -1,32 +1,14 @@
 <template>
   <div class="register">
     <h1>Sign Up</h1>
-    <Form :validation-schema="schema" @submit="onSubmit">
-      <div>
-        <label>Name</label>
-        <Field name="name" placeholder="Enter your name" />
-        <ErrorMessage name="name" class="error" />
-      </div>
+    <form @submit.prevent="onSubmit">
+      <BaseInput v-model="name" placeholder="Name" required />
+      <BaseInput v-model="email" placeholder="Email" type="email" required />
+      <BaseInput v-model="password" placeholder="Password" type="password" required />
 
-      <div>
-        <label>Email</label>
-        <Field name="email" type="email" placeholder="Enter your email" />
-        <ErrorMessage name="email" class="error" />
-      </div>
-
-      <div>
-        <label>Password</label>
-        <Field name="password" type="password" placeholder="Enter your password" />
-        <ErrorMessage name="password" class="error" />
-      </div>
-
-      <button type="submit" :disabled="loading">
-        <span v-if="loading">Signing up...</span>
-        <span v-else>Sign Up</span>
-      </button>
-    </Form>
-
-    <p style="margin-top: 15px">
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>
       Already have an account?
       <a href="#" @click.prevent="goLogin">Login</a>
     </p>
@@ -34,61 +16,45 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import { Form, Field, ErrorMessage } from 'vee-validate'
-import * as yup from 'yup'
 import axios from 'axios'
 import bcrypt from 'bcryptjs'
-import DOMPurify from 'dompurify'
+import BaseInput from './BaseInput.vue'
 
 export default {
   name: 'SignUpPage',
-  components: { Form, Field, ErrorMessage },
-  setup() {
-    const loading = ref(false)
-
-    const schema = yup.object({
-      name: yup.string().required('Name is required'),
-      email: yup.string().required('Email is required').email('Invalid email format'),
-      password: yup.string().required('Password is required').min(8, 'Password must be at least 8 characters')
-    })
-
-    const onSubmit = async (values) => {
-      loading.value = true
+  components: { BaseInput },
+  data() {
+    return {
+      name: '',
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    async onSubmit() {
       try {
-        const safeName = DOMPurify.sanitize(values.name).trim()
-        const safeEmail = DOMPurify.sanitize(values.email).trim()
-        const safePassword = DOMPurify.sanitize(values.password).trim()
-        const hashedPassword = bcrypt.hashSync(safePassword, 10)
-
+        const hashedPassword = bcrypt.hashSync(this.password, 10)
         const usersRes = await axios.get('http://localhost:3000/users')
-        if (usersRes.data.some(u => u.email.toLowerCase() === safeEmail.toLowerCase())) {
-          alert('Email already registered')
-          return
+        if (usersRes.data.some(u => u.email.toLowerCase() === this.email.toLowerCase())) {
+          return alert('Email already registered')
         }
 
         await axios.post('http://localhost:3000/users', {
-          name: safeName,
-          email: safeEmail,
+          name: this.name,
+          email: this.email,
           password: hashedPassword
         })
 
-        const token = btoa(JSON.stringify({ email: safeEmail, exp: Date.now() + 3600000 }))
-        localStorage.setItem('jwt-token', token)
-
         alert('Signup successful! Please login.')
-        window.location.href = '/login'
+        this.$router.push('/login')
       } catch (err) {
         console.error(err)
-        alert('Signup failed. Check console.')
-      } finally {
-        loading.value = false
+        alert('Signup failed')
       }
+    },
+    goLogin() {
+      this.$router.push('/login')
     }
-
-    const goLogin = () => window.location.href = '/login'
-
-    return { schema, loading, onSubmit, goLogin }
   }
 }
 </script>
@@ -97,43 +63,19 @@ export default {
 .register {
   max-width: 400px;
   margin: 60px auto;
-  padding: 40px 30px;
-  background-color: #fff;
+  padding: 40px;
+  background: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
-
-.register input {
+button {
   width: 100%;
-  height: 45px;
-  margin-bottom: 10px;
-  padding-left: 15px;
-  border: 1px solid #c3cfe2;
-  border-radius: 6px;
-  font-size: 16px;
-}
-
-.register button {
-  width: 100%;
-  height: 45px;
+  padding: 10px;
+  margin-top: 15px;
   background-color: #5dade2;
   color: #fff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-weight: 600;
-}
-
-.register button:disabled {
-  background-color: #a9cce3;
-  cursor: not-allowed;
-}
-
-.error {
-  color: red;
-  font-size: 13px;
-  text-align: left;
-  margin-bottom: 10px;
 }
 </style>
