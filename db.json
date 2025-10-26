@@ -1,4 +1,16 @@
 {
   "users": [],
-  "entities": []
+  "entities": [
+    {
+      "id": "7090",
+      "firstName": "roy",
+      "lastName": "mawla",
+      "dob": "2011-01-01",
+      "maritalStatus": "Single",
+      "address": "beirut",
+      "phone": "01111111",
+      "gender": "Male",
+      "profilePic": ""
+    }
+  ]
 }
