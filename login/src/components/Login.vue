@@ -1,146 +1,118 @@
 <template>
   <div class="login">
-    <img class="logo" src="../assets/signup.png" alt="Logo" />
     <h1>Login</h1>
-    <form @submit.prevent="onSubmit">
-      <label for="email">Email</label>
-      <input
-        id="email"
-        type="text"
-        v-model="email"
-        ref="emailInput"
-        autocomplete="username"
-      />
-      <span role="alert" class="error">{{ errors.email }}</span>
+    <Form :validation-schema="schema" @submit="onSubmit">
+      <div>
+        <label>Email</label>
+        <Field name="email" type="email" placeholder="Enter your email" />
+        <ErrorMessage name="email" class="error" />
+      </div>
 
-      <label for="password">Password</label>
-      <input
-        id="password"
-        type="password"
-        v-model="password"
-        autocomplete="current-password"
-      />
-      <span role="alert" class="error">{{ errors.password }}</span>
+      <div>
+        <label>Password</label>
+        <Field name="password" type="password" placeholder="Enter your password" />
+        <ErrorMessage name="password" class="error" />
+      </div>
 
-      <button type="submit" :disabled="loading" :aria-busy="loading">
+      <button type="submit" :disabled="loading">
         <span v-if="loading">Logging in...</span>
         <span v-else>Login</span>
       </button>
-    </form>
+    </Form>
 
-    <p>
-      <router-link :to="{ name: 'SignUp' }">Sign Up</router-link>
+    <p style="margin-top: 15px">
+      Don't have an account? 
+      <a href="#" @click.prevent="goSignup">Sign Up</a>
     </p>
   </div>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
+import { Form, Field, ErrorMessage } from 'vee-validate'
+import * as yup from 'yup'
 import axios from 'axios'
 import bcrypt from 'bcryptjs'
 import DOMPurify from 'dompurify'
-import { useForm } from 'vee-validate'
-import * as yup from 'yup'
 
 export default {
   name: 'LoginPage',
+  components: { Form, Field, ErrorMessage },
   setup() {
-    const email = ref('')
-    const password = ref('')
     const loading = ref(false)
-    const emailInput = ref(null)
 
-    // Validation schema
     const schema = yup.object({
-      email: yup.string().required('Email is required').email('Invalid email'),
-      password: yup
-        .string()
-        .required('Password is required')
-        .min(8, 'Password must be at least 8 characters')
+      email: yup.string().required('Email is required').email('Invalid email format'),
+      password: yup.string().required('Password is required').min(8, 'Password must be at least 8 characters')
     })
 
-    const { handleSubmit, errors } = useForm({ validationSchema: schema })
-
-    onMounted(() => {
-      emailInput.value.focus()
-      const token = localStorage.getItem('jwt-token')
-      if (token) {
-        const payload = JSON.parse(atob(token))
-        if (Date.now() < payload.exp) {
-          window.location.href = '/'
-        } else {
-          localStorage.removeItem('jwt-token')
-          localStorage.removeItem('user-info')
-        }
-      }
-    })
-
-    const onSubmit = handleSubmit(async () => {
+    const onSubmit = async (values) => {
       loading.value = true
       try {
-        const safeEmail = DOMPurify.sanitize(email.value)
-        const safePassword = DOMPurify.sanitize(password.value)
+        const safeEmail = DOMPurify.sanitize(values.email).trim()
+        const safePassword = DOMPurify.sanitize(values.password).trim()
 
         const response = await axios.get('http://localhost:3000/users')
         const user = response.data.find(
-          u =>
-            u.email.toLowerCase() === safeEmail.toLowerCase() &&
-            bcrypt.compareSync(safePassword, u.password)
+          u => u.email.toLowerCase() === safeEmail.toLowerCase() &&
+               bcrypt.compareSync(safePassword, u.password)
         )
 
-        if (user) {
-          const token = btoa(
-            JSON.stringify({ email: user.email, exp: Date.now() + 3600000 })
-          )
-          localStorage.setItem('jwt-token', token)
-          localStorage.setItem('user-info', JSON.stringify(user))
-          window.location.href = '/'
-        } else {
-          alert('Invalid email or password')
+        if (!user) {
+          alert('Invalid email or password') 
+          return
         }
+
+        let token = localStorage.getItem('jwt-token')
+        if (!token) {
+          token = btoa(JSON.stringify({ email: user.email, exp: Date.now() + 3600000 }))
+          localStorage.setItem('jwt-token', token)
+        }
+
+        localStorage.setItem('user-info', JSON.stringify(user))
+        window.location.href = '/'
       } catch (err) {
         console.error(err)
-        alert('Login failed')
+        alert('Login failed. Check console.')
       } finally {
         loading.value = false
       }
-    })
+    }
 
-    return { email, password, loading, emailInput, errors, onSubmit }
+    const goSignup = () => window.location.href = '/sign-up'
+
+    return { schema, loading, onSubmit, goSignup }
   }
 }
 </script>
 
 <style scoped>
+.error {
+  color: red;
+  font-size: 13px;
+  margin-bottom: 10px;
+  display: block;
+  text-align: left;
+}
+
 .login {
-  background-color: #fff;
-  padding: 40px 30px;
   max-width: 400px;
   margin: 60px auto;
+  padding: 40px 30px;
+  background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
-.logo {
-  width: 80px;
-  margin-bottom: 20px;
-}
-
 .login input {
   width: 100%;
   height: 45px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   padding-left: 15px;
   border: 1px solid #c3cfe2;
   border-radius: 6px;
   font-size: 16px;
-}
-
-.login input:focus {
-  outline: none;
-  border-color: #5dade2;
-  box-shadow: 0 0 5px rgba(93, 173, 226, 0.5);
 }
 
 .login button {
@@ -157,25 +129,5 @@ export default {
 .login button:disabled {
   background-color: #a9cce3;
   cursor: not-allowed;
-}
-
-.error {
-  color: red;
-  font-size: 13px;
-  display: block;
-  text-align: left;
-  margin-bottom: 10px;
-}
-
-@media (max-width: 600px) {
-  .login {
-    width: 90%;
-    padding: 30px 20px;
-  }
-  .login input,
-  .login button {
-    height: 42px;
-    font-size: 15px;
-  }
 }
 </style>

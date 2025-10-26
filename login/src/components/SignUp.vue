@@ -1,34 +1,41 @@
 <template>
   <div class="register">
     <h1>Sign Up</h1>
-    <form @submit.prevent="onSubmit">
-      <label for="name">Name</label>
-      <input id="name" v-model="name" />
-      <span class="error">{{ nameError }}</span>
+    <Form :validation-schema="schema" @submit="onSubmit">
+      <div>
+        <label>Name</label>
+        <Field name="name" placeholder="Enter your name" />
+        <ErrorMessage name="name" class="error" />
+      </div>
 
-      <label for="email">Email</label>
-      <input id="email" v-model="email" />
-      <span class="error">{{ emailError }}</span>
+      <div>
+        <label>Email</label>
+        <Field name="email" type="email" placeholder="Enter your email" />
+        <ErrorMessage name="email" class="error" />
+      </div>
 
-      <label for="password">Password</label>
-      <input id="password" type="password" v-model="password" />
-      <span class="error">{{ passwordError }}</span>
+      <div>
+        <label>Password</label>
+        <Field name="password" type="password" placeholder="Enter your password" />
+        <ErrorMessage name="password" class="error" />
+      </div>
 
       <button type="submit" :disabled="loading">
         <span v-if="loading">Signing up...</span>
         <span v-else>Sign Up</span>
       </button>
-    </form>
-        <p style="margin-top: 15px">
+    </Form>
+
+    <p style="margin-top: 15px">
       Already have an account?
-      <router-link :to="{ name: 'LoginPage' }">Login</router-link>
+      <a href="#" @click.prevent="goLogin">Login</a>
     </p>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
-import { useForm, useField } from 'vee-validate'
+import { Form, Field, ErrorMessage } from 'vee-validate'
 import * as yup from 'yup'
 import axios from 'axios'
 import bcrypt from 'bcryptjs'
@@ -36,100 +43,75 @@ import DOMPurify from 'dompurify'
 
 export default {
   name: 'SignUpPage',
+  components: { Form, Field, ErrorMessage },
   setup() {
     const loading = ref(false)
 
     const schema = yup.object({
       name: yup.string().required('Name is required'),
-      email: yup.string().required('Email is required').email('Invalid email'),
+      email: yup.string().required('Email is required').email('Invalid email format'),
       password: yup.string().required('Password is required').min(8, 'Password must be at least 8 characters')
     })
 
-    // Initialize form
-    const { handleSubmit } = useForm({ validationSchema: schema })
-
-    // Initialize fields
-    const { value: name, errorMessage: nameError } = useField('name')
-    const { value: email, errorMessage: emailError } = useField('email')
-    const { value: password, errorMessage: passwordError } = useField('password')
-
-    // Submit handler
-    const onSubmit = handleSubmit(async () => {
+    const onSubmit = async (values) => {
       loading.value = true
       try {
-        const safeName = DOMPurify.sanitize(name.value)
-        const safeEmail = DOMPurify.sanitize(email.value)
-        const safePassword = DOMPurify.sanitize(password.value)
-
+        const safeName = DOMPurify.sanitize(values.name).trim()
+        const safeEmail = DOMPurify.sanitize(values.email).trim()
+        const safePassword = DOMPurify.sanitize(values.password).trim()
         const hashedPassword = bcrypt.hashSync(safePassword, 10)
 
-        const response = await axios.post('http://localhost:3000/users', {
+        const usersRes = await axios.get('http://localhost:3000/users')
+        if (usersRes.data.some(u => u.email.toLowerCase() === safeEmail.toLowerCase())) {
+          alert('Email already registered')
+          return
+        }
+
+        await axios.post('http://localhost:3000/users', {
           name: safeName,
           email: safeEmail,
           password: hashedPassword
         })
 
-        localStorage.setItem('jwt-token', btoa(JSON.stringify({ email: safeEmail, exp: Date.now() + 3600000 })))
-        localStorage.setItem('user-info', JSON.stringify(response.data))
+        const token = btoa(JSON.stringify({ email: safeEmail, exp: Date.now() + 3600000 }))
+        localStorage.setItem('jwt-token', token)
 
-        window.location.href = '/'
+        alert('Signup successful! Please login.')
+        window.location.href = '/login'
       } catch (err) {
-        console.error('Sign up failed:', err)
-        alert('Sign up failed. Check console.')
+        console.error(err)
+        alert('Signup failed. Check console.')
       } finally {
         loading.value = false
       }
-    })
-
-    return {
-      name,
-      email,
-      password,
-      nameError,
-      emailError,
-      passwordError,
-      loading,
-      onSubmit
     }
+
+    const goLogin = () => window.location.href = '/login'
+
+    return { schema, loading, onSubmit, goLogin }
   }
 }
 </script>
 
 <style scoped>
-/* keep your original styles here */
-</style>
-
-
-<style scoped>
 .register {
-  background-color: #fff;
-  padding: 40px 30px;
   max-width: 400px;
   margin: 60px auto;
+  padding: 40px 30px;
+  background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
-.logo {
-  width: 80px;
-  margin-bottom: 20px;
-}
-
 .register input {
   width: 100%;
   height: 45px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   padding-left: 15px;
   border: 1px solid #c3cfe2;
   border-radius: 6px;
   font-size: 16px;
-}
-
-.register input:focus {
-  outline: none;
-  border-color: #5dade2;
-  box-shadow: 0 0 5px rgba(93, 173, 226, 0.5);
 }
 
 .register button {
@@ -151,21 +133,7 @@ export default {
 .error {
   color: red;
   font-size: 13px;
-  display: block;
   text-align: left;
   margin-bottom: 10px;
 }
-
-@media (max-width: 600px) {
-  .register {
-    width: 90%;
-    padding: 30px 20px;
-  }
-  .register input,
-  .register button {
-    height: 42px;
-    font-size: 15px;
-  }
-}
 </style>
-
