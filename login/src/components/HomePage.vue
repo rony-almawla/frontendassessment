@@ -1,4 +1,5 @@
 <template>
+  <AppHeader />   <!-- ✅ Header now included here -->
   <div class="home">
     <h1>Welcome, {{ userName }}</h1>
     <p>Email: {{ userEmail }}</p>
@@ -8,9 +9,11 @@
 
 <script>
 import { ref, onMounted } from 'vue'
+import AppHeader from './AppHeader.vue'
 
 export default {
   name: 'HomePage',
+  components: { AppHeader }, 
   setup() {
     const userName = ref('')
     const userEmail = ref('')
@@ -37,7 +40,6 @@ export default {
         userName.value = user.name
         userEmail.value = user.email
       } catch {
-        // If token or user info is corrupted
         localStorage.removeItem('jwt-token')
         localStorage.removeItem('user-info')
         window.location.href = '/login'

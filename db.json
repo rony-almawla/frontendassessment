@@ -1,21 +1,4 @@
 {
-  "user": [
-    {
-      "name": "rony",
-      "email": "rony@gmail.com",
-      "password": "123"
-    },
-    {
-      "id": "7cd5",
-      "name": "rony",
-      "email": "rony@gmail.com",
-      "password": "123"
-    },
-    {
-      "id": "c748",
-      "name": "mhmd",
-      "email": "mhmd@gmail.com",
-      "password": "abc123"
-    }
-  ]
+  "users": [],
+  "entities": []
 }
