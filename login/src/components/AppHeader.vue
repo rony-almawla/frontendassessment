@@ -3,9 +3,9 @@
     <div class = "nav">
         <router-link to ='/'>Home</router-link>
         <router-link to ='/AddEntity'>Add Entity</router-link>
-        <router-link to ='/Update'>Update Entity</router-link>
-        <router-link to ='/Delete'>Delete Entity</router-link>
-        <router-link to ='/Read'>Read Entity</router-link>
+        <router-link to ='/UpdateEntity'>Update Entity</router-link>
+        <router-link to ='/DeleteEntity'>Delete Entity</router-link>
+        <router-link to ='/ReadEntity'>Read Entity</router-link>
     </div>
   </header>
 </template>

@@ -1,14 +1,54 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "9a87",
+      "name": "mawla",
+      "email": "mawla@gmail.com",
+      "password": "$2b$10$atWA3JmTdTFoR7UGKXU/q.Xss1SRjGJk2w/Ph.V6geqfrHCTWq2ka"
+    }
+  ],
   "entities": [
     {
-      "id": "7090",
-      "firstName": "roy",
+      "id": "c078",
+      "firstName": "rwa",
+      "lastName": "ewaa",
+      "dob": "2001-01-01",
+      "maritalStatus": "Single",
+      "address": "beirut",
+      "phone": "01910191",
+      "gender": "Male",
+      "profilePic": ""
+    },
+    {
+      "id": "9946",
+      "firstName": "hasan",
       "lastName": "mawla",
-      "dob": "2011-01-01",
+      "dob": "2022-01-01",
       "maritalStatus": "Single",
       "address": "beirut",
       "phone": "01111111",
+      "gender": "Male",
+      "profilePic": ""
+    },
+    {
+      "id": "9b9f",
+      "firstName": "mawla",
+      "lastName": "mawla",
+      "dob": "2001-01-01",
+      "maritalStatus": "Single",
+      "address": "neirut",
+      "phone": "01010101",
+      "gender": "Male",
+      "profilePic": ""
+    },
+    {
+      "id": "af2a",
+      "firstName": "wow",
+      "lastName": "wow",
+      "dob": "10101-01-01",
+      "maritalStatus": "Single",
+      "address": "name",
+      "phone": "01122222",
       "gender": "Male",
       "profilePic": ""
     }
