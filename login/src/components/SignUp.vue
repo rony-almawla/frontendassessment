@@ -3,8 +3,20 @@
     <h1>Sign Up</h1>
     <form @submit.prevent="onSubmit">
       <BaseInput v-model="name" placeholder="Name" required />
-      <BaseInput v-model="email" placeholder="Email" type="email" required />
-      <BaseInput v-model="password" placeholder="Password" type="password" required />
+      <BaseInput 
+        v-model="email" 
+        placeholder="Email" 
+        type="email" 
+        required 
+      />
+      <BaseInput 
+        v-model="password" 
+        placeholder="Password" 
+        type="password" 
+        required 
+        pattern=".{8,}" 
+        title="Password must be at least 8 characters long" 
+      />
 
       <button type="submit">Sign Up</button>
     </form>
@@ -35,9 +47,11 @@ export default {
       try {
         const hashedPassword = bcrypt.hashSync(this.password, 10)
         const usersRes = await axios.get('http://localhost:3000/users')
+
         if (usersRes.data.some(u => u.email.toLowerCase() === this.email.toLowerCase())) {
           return alert('Email already registered')
         }
+
 
         await axios.post('http://localhost:3000/users', {
           name: this.name,
@@ -60,7 +74,6 @@ export default {
 </script>
 
 <style scoped>
-
 .register, .login {
   max-width: 400px;
   margin: 80px auto;
@@ -71,7 +84,6 @@ export default {
   transition: all 0.3s ease;
 }
 
-
 .register h1, .login h1 {
   text-align: center;
   margin-bottom: 30px;
@@ -79,7 +91,6 @@ export default {
   font-weight: 700;
   color: #333;
 }
-
 
 .register input, .login input,
 .base-input {
@@ -97,7 +108,6 @@ export default {
   box-shadow: 0 0 10px rgba(93, 173, 226, 0.2);
   outline: none;
 }
-
 
 button {
   width: 100%;
@@ -118,7 +128,6 @@ button:hover {
   transform: translateY(-2px);
 }
 
-
 p {
   text-align: center;
   margin-top: 25px;
@@ -138,7 +147,6 @@ p a:hover {
   text-decoration: underline;
 }
 
-
 .register form > *, .login form > * {
   display: block;
 }
@@ -157,5 +165,4 @@ p a:hover {
     font-size: 15px;
   }
 }
-
 </style>

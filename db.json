@@ -1,63 +1,6 @@
 {
   "users": [
-    {
-      "id": "9a87",
-      "name": "mawla",
-      "email": "mawla@gmail.com",
-      "password": "$2b$10$atWA3JmTdTFoR7UGKXU/q.Xss1SRjGJk2w/Ph.V6geqfrHCTWq2ka"
-    },
-    {
-      "id": "9675",
-      "name": "ronyyy",
-      "email": "rony@gmail.com",
-      "password": "$2b$10$iRT/2Zx6/vRqSpukffZR9OamNGBe5HzLL7wrZ/owZnTVRcrJO9WMC"
-    },
-    {
-      "id": "423b",
-      "name": "chris",
-      "email": "chris@gmail.com",
-      "password": "$2b$10$MYkw2N9Y/gsJpNbLtOjF.ehYobO1Ehq8U5chGEbM/Ie2D56QnoD52"
-    },
-    {
-      "id": "514f",
-      "name": "ahmad",
-      "email": "ahmad@gmail.com",
-      "password": "$2b$10$rj7k30N88GCe210lxH6WTutqHEjxGVAkXvRyCT2SHZE6iunbpF.ym"
-    }
+
   ],
-  "entities": [
-    {
-      "id": "6ff0",
-      "firstName": "bbbb",
-      "lastName": "afasf",
-      "dob": "20001-01-01",
-      "maritalStatus": "Single",
-      "address": "afadf",
-      "phone": "afdafad",
-      "gender": "Male",
-      "profilePic": ""
-    },
-    {
-      "id": "3ed0",
-      "firstName": "afds",
-      "lastName": "adfadf",
-      "dob": "2001-01-01",
-      "maritalStatus": "Married",
-      "address": "afdfda",
-      "phone": "adfadfadf",
-      "gender": "Male",
-      "profilePic": "dfd 0.png"
-    },
-    {
-      "id": "aa72",
-      "firstName": "rony",
-      "lastName": "mawla",
-      "dob": "2001-01-01",
-      "maritalStatus": "Single",
-      "address": "beir",
-      "phone": "01010101",
-      "gender": "Male",
-      "profilePic": "dfd 0.png"
-    }
-  ]
+  "entities": []
 }
