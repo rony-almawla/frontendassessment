@@ -27,74 +27,8 @@
   ],
   "entities": [
     {
-      "id": "9946",
-      "firstName": "hasan",
-      "lastName": "mawla",
-      "dob": "2022-01-01",
-      "maritalStatus": "Single",
-      "address": "beirut",
-      "phone": "01111111",
-      "gender": "Male",
-      "profilePic": ""
-    },
-    {
-      "id": "9b9f",
-      "firstName": "mawla",
-      "lastName": "mawla",
-      "dob": "2001-01-01",
-      "maritalStatus": "Single",
-      "address": "neirut",
-      "phone": "01010101",
-      "gender": "Male",
-      "profilePic": ""
-    },
-    {
-      "id": "af2a",
-      "firstName": "wow",
-      "lastName": "wow",
-      "dob": "10101-01-01",
-      "maritalStatus": "Single",
-      "address": "name",
-      "phone": "01122222",
-      "gender": "Male",
-      "profilePic": ""
-    },
-    {
-      "id": "2b90",
-      "firstName": "rony123",
-      "lastName": "rony123",
-      "dob": "2001-01-01",
-      "maritalStatus": "Single",
-      "address": "beirut",
-      "phone": "01010101",
-      "gender": "Male",
-      "profilePic": "ecom.svg"
-    },
-    {
-      "id": "9504",
-      "firstName": "rony",
-      "lastName": "rony",
-      "dob": "2025-09-29",
-      "maritalStatus": "Single",
-      "address": "beirut",
-      "phone": "01333333",
-      "gender": "Male",
-      "profilePic": "ecom.svg"
-    },
-    {
-      "id": "40cb",
-      "firstName": "sds",
-      "lastName": "sd",
-      "dob": "2025-09-29",
-      "maritalStatus": "Single",
-      "address": "asdad",
-      "phone": "01010101",
-      "gender": "Male",
-      "profilePic": ""
-    },
-    {
       "id": "6ff0",
-      "firstName": "afas",
+      "firstName": "bbbb",
       "lastName": "afasf",
       "dob": "20001-01-01",
       "maritalStatus": "Single",
@@ -102,6 +36,28 @@
       "phone": "afdafad",
       "gender": "Male",
       "profilePic": ""
+    },
+    {
+      "id": "3ed0",
+      "firstName": "afds",
+      "lastName": "adfadf",
+      "dob": "2001-01-01",
+      "maritalStatus": "Married",
+      "address": "afdfda",
+      "phone": "adfadfadf",
+      "gender": "Male",
+      "profilePic": "dfd 0.png"
+    },
+    {
+      "id": "aa72",
+      "firstName": "rony",
+      "lastName": "mawla",
+      "dob": "2001-01-01",
+      "maritalStatus": "Single",
+      "address": "beir",
+      "phone": "01010101",
+      "gender": "Male",
+      "profilePic": "dfd 0.png"
     }
   ]
 }

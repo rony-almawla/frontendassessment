@@ -26,9 +26,24 @@ export default {
 </script>
 
 <style scoped>
-.base-select {
+/* .base-select {
   width: 100%;
   padding: 8px;
   border-radius: 4px;
+} */
+ .base-select {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
+
+.base-select:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 10px rgba(102,126,234,0.2);
+  outline: none;
+}
+
 </style>

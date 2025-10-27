@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style scoped>
-.nav{
+/* .nav{
     background-color:#333;
     overflow:hidden;
 }
@@ -31,5 +31,30 @@ export default {
 .nav a:hover{
     background:#ddd;
     color:#333;
+} */
+ .nav {
+  background: linear-gradient(90deg, #4facfe, #00f2fe);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: flex-start;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
+
+.nav a {
+  color: #fff;
+  padding: 10px 18px;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  margin-right: 10px;
+}
+
+.nav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
 </style>
+

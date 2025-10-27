@@ -54,7 +54,7 @@ export default {
 </script>
 
 <style scoped>
-.home {
+/* .home {
   max-width: 500px;
   margin: 60px auto;
   padding: 30px;
@@ -77,5 +77,43 @@ button {
 
 button:hover {
   background-color: #5499c7;
+} */
+ .home {
+  max-width: 550px;
+  margin: 60px auto;
+  padding: 40px;
+  text-align: center;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
 }
+
+.home h1 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.home p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+button {
+  padding: 14px 30px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #5a67d8, #6b46c1);
+  transform: translateY(-2px);
+}
+
 </style>

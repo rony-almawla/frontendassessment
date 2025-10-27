@@ -26,7 +26,21 @@ export default {
 </script>
 
 <style scoped>
-.radio-group label {
+/* .radio-group label {
   margin-right: 10px;
+} */
+ .radio-group label {
+  margin-right: 20px;
+  font-weight: 500;
+  color: #555;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
 }
+
+.radio-group input[type="radio"] {
+  margin-right: 6px;
+  accent-color: #667eea;
+}
+
 </style>
