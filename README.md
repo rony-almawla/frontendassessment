@@ -56,7 +56,7 @@ Installation
 
 Clone the repository
 
-git clone https://github.com/your-username/vue-entity-crud.git
+git clone https://github.com/rony-almawla/frontendassessment.git
 cd vue-entity-crud
 
 
@@ -132,9 +132,9 @@ bcryptjs
 
 JSON Server (for mock backend)
 
-Screenshots
 
-(Optional: Add screenshots of Home Page, Add Entity Form, Read Entity Table, Login, and Access Denied pages)
+
+
 
 Notes
 
