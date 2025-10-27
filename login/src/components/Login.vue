@@ -47,25 +47,6 @@ export default {
 </script>
 
 <style scoped>
-/* .login {
-  max-width: 400px;
-  margin: 60px auto;
-  padding: 40px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 15px;
-  background-color: #5dade2;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-} */
- /* Container */
 .register, .login {
   max-width: 400px;
   margin: 80px auto;
@@ -76,7 +57,7 @@ button {
   transition: all 0.3s ease;
 }
 
-/* Headings */
+
 .register h1, .login h1 {
   text-align: center;
   margin-bottom: 30px;
@@ -85,7 +66,7 @@ button {
   color: #333;
 }
 
-/* Inputs */
+
 .register input, .login input,
 .base-input {
   width: 100%;
@@ -103,7 +84,7 @@ button {
   outline: none;
 }
 
-/* Buttons */
+
 button {
   width: 100%;
   padding: 14px 0;
@@ -123,7 +104,7 @@ button:hover {
   transform: translateY(-2px);
 }
 
-/* Links */
+
 p {
   text-align: center;
   margin-top: 25px;
@@ -143,7 +124,7 @@ p a:hover {
   text-decoration: underline;
 }
 
-/* Smooth spacing adjustments */
+
 .register form > *, .login form > * {
   display: block;
 }
@@ -153,7 +134,7 @@ p a:hover {
   font-weight: 500;
 }
 
-/* Mobile responsiveness */
+
 @media (max-width: 480px) {
   .register, .login {
     padding: 35px 25px;

@@ -26,12 +26,7 @@ export default {
 </script>
 
 <style scoped>
-/* .base-select {
-  width: 100%;
-  padding: 8px;
-  border-radius: 4px;
-} */
- .base-select {
+t {
   width: 100%;
   padding: 12px 15px;
   border-radius: 10px;

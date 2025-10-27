@@ -15,23 +15,7 @@ export default {
 </script>
 
 <style scoped>
-/* .nav{
-    background-color:#333;
-    overflow:hidden;
-}
-.nav a{
-    float: left;
-    color:#f2f2f2;
-    padding:16px;
-    text-align:center;
-    font-size:14px;
-    text-decoration:none;
-    margin-right:5px;
-}
-.nav a:hover{
-    background:#ddd;
-    color:#333;
-} */
+
  .nav {
   background: linear-gradient(90deg, #4facfe, #00f2fe);
   padding: 15px 30px;

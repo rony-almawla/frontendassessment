@@ -17,7 +17,7 @@
       <label>Gender</label>
       <BaseSelect v-model="gender" :options="['Male','Female']" required />
 
-      <!-- Modern Drag & Drop Upload -->
+ 
       <div
         class="file-drop"
         @dragover.prevent
@@ -108,7 +108,7 @@ export default {
 </script>
 
 <style scoped>
-/* Form Container */
+
 .entity-form {
   max-width: 600px;
   margin: 50px auto;
@@ -118,7 +118,7 @@ export default {
   box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 
-/* Form Heading */
+
 .entity-form h1 {
   text-align: center;
   margin-bottom: 30px;
@@ -127,29 +127,29 @@ export default {
   color: #333;
 }
 
-/* BaseInput, Selects, Date, File */
+
 .entity-form input,
 .entity-form select,
 .base-input,
 .base-select {
   width: 100%;
   padding: 14px 16px;
-  margin-bottom: 20px; /* spacing between fields */
+  margin-bottom: 20px;
   border-radius: 12px;
   border: 1px solid #ddd;
   font-size: 15px;
-  line-height: 1.4; /* ensures placeholder text is centered */
+  line-height: 1.4; 
   transition: all 0.3s ease;
 }
 
-/* Date input fixes */
+
 .entity-form input[type="date"] {
   padding: 12px 16px;
   font-size: 15px;
   line-height: 1.4;
 }
 
-/* File input handled via drag-drop preview */
+
 .file-drop {
   border: 2px dashed #5dade2;
   border-radius: 16px;
@@ -171,7 +171,7 @@ export default {
   font-weight: 500;
 }
 
-/* Live preview */
+
 .preview img {
   width: 120px;
   height: 120px;
@@ -185,7 +185,7 @@ export default {
   font-weight: 500;
 }
 
-/* Input Focus */
+
 .entity-form input:focus,
 .entity-form select:focus,
 .base-input:focus,
@@ -195,7 +195,7 @@ export default {
   outline: none;
 }
 
-/* Submit Button */
+
 button {
   width: 100%;
   padding: 14px 0;

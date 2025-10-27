@@ -26,9 +26,7 @@ export default {
 </script>
 
 <style scoped>
-/* .radio-group label {
-  margin-right: 10px;
-} */
+
  .radio-group label {
   margin-right: 20px;
   font-weight: 500;

@@ -48,61 +48,7 @@ export default {
 </script>
 
 <style scoped>
-/* .entity-form {
-  max-width: 600px;
-  margin: 50px auto;
-  padding: 40px;
-  background: #fefefe;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
-}
 
-.entity-form h1 {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #333;
-  font-weight: 700;
-}
-
-.entity-form form > * {
-  margin-bottom: 20px;
-}
-
-button {
-  width: 100%;
-  padding: 12px 0;
-  background: linear-gradient(90deg, #667eea, #764ba2);
-  color: #fff;
-  font-weight: 600;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  background: linear-gradient(90deg, #5a67d8, #6b46c1);
-  transform: translateY(-2px);
-}
-
-input[type="file"] {
-  border: 2px dashed #ccc;
-  border-radius: 8px;
-  padding: 10px;
-  width: 100%;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-input[type="file"]:hover {
-  border-color: #667eea;
-}
-
-label {
-  font-weight: 600;
-  color: #555;
-} */
  .entity-list {
   max-width: 900px;
   margin: 50px auto;

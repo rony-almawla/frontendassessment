@@ -19,12 +19,7 @@ export default {
 </script>
 
 <style scoped>
-/* .base-input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-} */
+
  .base-input {
   width: 100%;
   padding: 12px 15px;
